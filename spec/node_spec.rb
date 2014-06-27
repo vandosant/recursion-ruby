@@ -8,7 +8,8 @@ describe Node do
 
   it "can add child nodes" do
     node = Node.new("Foo")
-    child_node = node.add_child("Bar")
+    child_node = Node.new("Bar")
+    node.add_child(child_node)
     expect(node.children).to eq([child_node])
     expect(child_node.name).to eq("Bar")
   end

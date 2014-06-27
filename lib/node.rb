@@ -7,9 +7,7 @@ class Node
     @children = []
   end
 
-  def add_child(name)
-    node = Node.new(name)
+  def add_child(node)
     @children << node
-    node
   end
 end
