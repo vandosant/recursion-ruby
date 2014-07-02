@@ -15,10 +15,10 @@ class Tree
     result << node.name
 
     node.children.each do |child_node|
-      result << names(child_node)
+      result += names(child_node)
     end
 
-    result.flatten
+    result
   end
 
   def names_with_indentation(node)
@@ -27,10 +27,10 @@ class Tree
     result << node.name
 
     node.children.each do |child_node|
-      result << names_with_indentation(child_node).map { |item| '  ' + item.to_s }
+      result += names_with_indentation(child_node).map { |item| '  ' + item.to_s }
     end
 
-    result.flatten
+    result
   end
 
 
