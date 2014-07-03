@@ -2,22 +2,16 @@ require 'node'
 
 class Tree
   def print_names(node)
-    puts node.name
-
-    node.children.each do |child_node|
-      print_names(child_node)
+    walk(node) do |child_node|
+      puts child_node.name
     end
   end
 
   def names(node)
     result = []
-
-    result << node.name
-
-    node.children.each do |child_node|
-      result += names(child_node)
+    walk(node) do |child_node|
+      result << child_node.name
     end
-
     result
   end
 
@@ -27,7 +21,7 @@ class Tree
     result << node.name
 
     node.children.each do |child_node|
-      result += names_with_indentation(child_node).map { |item| '  ' + item.to_s }
+      result += names_with_indentation(child_node).map { |child_node_name| '  ' + child_node_name }
     end
 
     result
@@ -44,5 +38,14 @@ class Tree
     end
 
     result
+  end
+
+  private
+
+  def walk(node, &block)
+    block.call(node)
+    node.children.each do |child_node|
+      walk(child_node, &block)
+    end
   end
 end
